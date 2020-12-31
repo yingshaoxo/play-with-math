@@ -46,11 +46,18 @@ def draw_model(faces, color_map=blues, light=(1,2,3),
     glEnable(GL_DEPTH_TEST)
     glCullFace(GL_BACK)
 
+    End = False
     while cam.is_shooting():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+                try:
+                    pygame.quit()
+                    quit()
+                except Exception:
+                    End = True
+                    break
+        if End:
+            break
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         Axes()
